@@ -12,7 +12,6 @@ const contentSchema = new mongoose.Schema({
     ],
     footer: String,
     color: { type: String, default: '#1c949d' },
-    lastUpdated: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model('ServerContent', contentSchema);

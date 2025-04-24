@@ -16,7 +16,6 @@ module.exports = {
             .setDescription(rulesData.description)
             .setColor(rulesData.color || '#1c949d')
             .setFooter({ text: rulesData.footer })
-            .setTimestamp();
 
         for (const field of rulesData.fields) {
             embed.addFields({ name: field.name, value: field.value });
