@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "created by alshifan for Hack the Brain",
   "dependencies": {
+    "discord-bot": "file:",
     "discord.js": "^14.18.0",
     "dotenv": "^16.5.0",
     "mongoose": "^8.13.2"
