@@ -3,8 +3,13 @@ const ServerContent = require('../models/ServerContent');
 
 module.exports = {
     name: 'getcontent',
-    description: 'Display a piece of embedded server content. Usage: !getcontent key',
+    description: 'Admin-only: Display a piece of embedded server content. Usage: !getcontent key',
     async execute(message) {
+        // 🔒 Check for admin permissions
+        if (!message.member.permissions.has('Administrator')) {
+            return message.reply("⛔ You don't have permission to use this command.");
+        }
+
         const args = message.content.split(' ').slice(1);
         const key = args[0];
 
@@ -21,6 +26,7 @@ module.exports = {
             .setDescription(content.description)
             .setColor(content.color || '#1c949d')
             .setFooter({ text: content.footer })
+            .setTimestamp();
 
         if (content.fields?.length) {
             content.fields.forEach(field => {
@@ -31,3 +37,4 @@ module.exports = {
         await message.channel.send({ embeds: [embed] });
     }
 };
+// This command allows admins to fetch and display embedded content from the database using a specific key.
