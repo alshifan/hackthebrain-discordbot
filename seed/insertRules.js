@@ -1,6 +1,6 @@
 // run.js or a one-time script
 const mongoose = require('mongoose');
-const ServerContent = require('./models/ServerContent');
+const ServerContent = require('../models/ServerContent.js');
 require('dotenv').config();
 
 mongoose.connect(process.env.MONGO_URI).then(async () => {
