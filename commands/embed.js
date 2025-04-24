@@ -9,7 +9,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle('📣 Announcement')
                 .setDescription('This is an embedded message!')
-                .setColor(0x000080)
+                .setColor(0x1c949d)
                 .setTimestamp();
 
             await message.channel.send({ embeds: [embed] });
