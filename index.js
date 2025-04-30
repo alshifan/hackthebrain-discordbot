@@ -1,3 +1,17 @@
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+    res.send('Discord bot is running.');
+});
+
+app.listen(port, () => {
+    console.log(`Web server running on port ${port}`);
+});
+
+// ------------------------------------
+
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const mongoose = require('mongoose');
 require('dotenv').config();
@@ -36,7 +50,7 @@ mongoose.connect(process.env.MONGO_URI)
 // Login bot
 client.login(process.env.DISCORD_TOKEN);
 
-// This code initializes a Discord bot using discord.js
+// Handle commands
 client.on('messageCreate', async message => {
     if (message.author.bot) return;
 
