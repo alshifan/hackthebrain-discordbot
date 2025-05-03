@@ -42,7 +42,7 @@ client.on('messageCreate', async message => {
 
     for (const command of client.commands.values()) {
         if (message.content.startsWith(`!${command.name}`)) {
-            await command.execute(message);
+            await command.execute(message); 
         }
     }
 });
