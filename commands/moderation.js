@@ -1,26 +1,36 @@
-// commands/moderation.js
-const hasPermission = require('../utils/hasPermission');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
-    name: 'moderation',
-    description: 'Kick or ban members',
-    async execute(message) {
-        if (!hasPermission(message.member, 'KickMembers')) return;
+    data: new SlashCommandBuilder()
+        .setName('moderation')
+        .setDescription('Kick or ban a user')
+        .addSubcommand(sub =>
+            sub.setName('kick')
+                .setDescription('Kick a user')
+                .addUserOption(option =>
+                    option.setName('target')
+                        .setDescription('User to kick')
+                        .setRequired(true)))
+        .addSubcommand(sub =>
+            sub.setName('ban')
+                .setDescription('Ban a user')
+                .addUserOption(option =>
+                    option.setName('target')
+                        .setDescription('User to ban')
+                        .setRequired(true)))
+        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
 
-        const args = message.content.split(' ');
-        const command = args[0];
-        const user = message.mentions.users.first();
+    async execute(interaction) {
+        const subcommand = interaction.options.getSubcommand();
+        const user = interaction.options.getUser('target');
+        const member = await interaction.guild.members.fetch(user.id);
 
-        if (!user) return message.reply('You need to mention someone.');
-
-        const member = message.guild.members.cache.get(user.id);
-
-        if (command === '!kick') {
+        if (subcommand === 'kick') {
             await member.kick();
-            message.channel.send(`👢 Kicked ${user.tag}`);
-        } else if (command === '!ban') {
+            await interaction.reply(`👢 Kicked ${user.tag}`);
+        } else if (subcommand === 'ban') {
             await member.ban();
-            message.channel.send(`🔨 Banned ${user.tag}`);
+            await interaction.reply(`🔨 Banned ${user.tag}`);
         }
     }
 };

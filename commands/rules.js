@@ -1,14 +1,19 @@
+const { SlashCommandBuilder } = require('discord.js');
 const createEmbed = require('../utils/createEmbed');
 const ServerContent = require('../models/ServerContent');
 
 module.exports = {
-    name: 'rules',
-    description: 'Displays server rules from MongoDB',
-    async execute(message) {
+    data: new SlashCommandBuilder()
+        .setName('rules')
+        .setDescription('Display server rules from the database'),
+
+    async execute(interaction) {
         const rulesData = await ServerContent.findOne({ key: 'rules' });
-        if (!rulesData) return message.reply('⚠️ No rules found in the database.');
+        if (!rulesData) {
+            return interaction.reply({ content: '⚠️ No rules found in the database.', ephemeral: true });
+        }
 
         const embed = createEmbed(rulesData);
-        await message.channel.send({ embeds: [embed] });
+        await interaction.reply({ embeds: [embed] });
     }
 };

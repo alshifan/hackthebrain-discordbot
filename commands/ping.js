@@ -1,12 +1,11 @@
-// commands/ping.js
+const { SlashCommandBuilder } = require('discord.js');
+
 module.exports = {
-    name: 'ping',
-    description: 'Replies with Pong!',
-    async execute(message) {
-        if (message.content === '!ping') {
-            await message.reply('🏓 Pong!');
-        }
+    data: new SlashCommandBuilder()
+        .setName('ping')
+        .setDescription('Replies with Pong!'),
+
+    async execute(interaction) {
+        await interaction.reply('🏓 Pong!');
     }
 };
-// This command replies with "Pong!" when a user sends "!ping" in the chat
-// It uses the message object to check the content of the message and reply accordingly  

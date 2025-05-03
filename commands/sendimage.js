@@ -1,57 +1,41 @@
-const { ChannelType, AttachmentBuilder } = require('discord.js');
-const hasPermission = require('../utils/hasPermission');
+const { SlashCommandBuilder, ChannelType } = require('discord.js');
 
 module.exports = {
-    name: 'sendimage',
-    description: 'Send an image to a specific channel (admin/mod only)',
+    data: new SlashCommandBuilder()
+        .setName('sendimage')
+        .setDescription('Send an image with optional caption to a channel')
+        .addChannelOption(option =>
+            option.setName('channel')
+                .setDescription('The target channel')
+                .addChannelTypes(ChannelType.GuildText)
+                .setRequired(true))
+        .addStringOption(option =>
+            option.setName('url')
+                .setDescription('Direct image URL')
+                .setRequired(true))
+        .addStringOption(option =>
+            option.setName('caption')
+                .setDescription('Optional caption')
+                .setRequired(false)),
 
-    async execute(message) {
-        if (!hasPermission(message.member, 'Administrator', 'ManageMessages')) {
-            return message.reply("⛔ You don't have permission to use this command.");
-        }
+    async execute(interaction) {
+        const channel = interaction.options.getChannel('channel');
+        const url = interaction.options.getString('url');
+        const caption = interaction.options.getString('caption') || null;
 
-        const args = message.content.split(' ').slice(1);
-        const channelMention = args[0];
-        const imageUrl = args[1];
-        const caption = args.slice(2).join(' ') || null;
-
-        if (!channelMention || !imageUrl) {
-            return message.reply('⚠️ Usage: `!sendimage #channel <imageURL> Optional caption`');
-        }
-
-        const channelId = channelMention.replace(/[<#>]/g, '');
-        const targetChannel = message.guild.channels.cache.get(channelId);
-
-        if (!targetChannel || targetChannel.type !== ChannelType.GuildText) {
-            return message.reply('⚠️ Invalid or missing text channel.');
-        }
+        const isDirectImage = /\.(jpg|jpeg|png|gif|webp)$/i.test(url);
 
         try {
-            // Check if URL ends with image extension
-            const isDirectImage = /\.(jpg|jpeg|png|gif|webp)$/i.test(imageUrl);
-
             if (isDirectImage) {
-                await targetChannel.send({
-                    content: caption || null,
-                    files: [imageUrl]
-                });
+                await channel.send({ content: caption || null, files: [url] });
             } else {
-                await targetChannel.send({
-                    content: `${caption ? caption + '\n' : ''}${imageUrl}`
-                });
+                await channel.send({ content: \`\${caption ? caption + '\n' : ''}\${url}\` });
             }
 
-            await message.reply(`✅ Image sent to ${targetChannel}`);
-            if (message.deletable) await message.delete();
-        } catch (err) {
-            console.error(err);
-            await message.reply('❌ Failed to send image. Make sure the URL is correct.');
+            await interaction.reply({ content: '✅ Image sent!', ephemeral: true });
+        } catch (error) {
+            console.error(error);
+            await interaction.reply({ content: '❌ Failed to send image.', ephemeral: true });
         }
     }
 };
-// This command allows an admin or mod to send an image to a specific channel.
-// It checks for permissions, validates the channel and image URL, and sends the image.
-// The command can be used with a caption and handles both direct image URLs and links.
-// The command is structured to be easily integrated into a Discord bot using discord.js.
-// It uses the ChannelType enum to ensure the target channel is a text channel.
-// The command also includes error handling for invalid channels and image URLs.

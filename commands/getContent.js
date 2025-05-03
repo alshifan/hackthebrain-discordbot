@@ -1,23 +1,31 @@
+const { SlashCommandBuilder } = require('discord.js');
 const createEmbed = require('../utils/createEmbed');
-const hasPermission = require('../utils/hasPermission');
 const ServerContent = require('../models/ServerContent');
+const hasPermission = require('../utils/hasPermission');
 
 module.exports = {
-    name: 'getcontent',
-    description: 'Admin-only: Display a piece of embedded server content. Usage: !getcontent key',
-    async execute(message) {
-        if (!hasPermission(message.member, 'Administrator')) {
-            return message.reply("⛔ You don't have permission to use this command.");
+    data: new SlashCommandBuilder()
+        .setName('getcontent')
+        .setDescription('Admin only: Display a custom embed from the database by key')
+        .addStringOption(option =>
+            option.setName('key')
+                .setDescription('The content key (e.g., about, faq, etc.)')
+                .setRequired(true)),
+
+    async execute(interaction) {
+        const member = interaction.member;
+        if (!hasPermission(member, 'Administrator')) {
+            return interaction.reply({ content: "⛔ You don't have permission to use this command.", ephemeral: true });
         }
 
-        const args = message.content.split(' ').slice(1);
-        const key = args[0];
-        if (!key) return message.reply('⚠️ Please provide a content key.');
-
+        const key = interaction.options.getString('key');
         const content = await ServerContent.findOne({ key });
-        if (!content) return message.reply('📭 No content found for that key.');
+
+        if (!content) {
+            return interaction.reply({ content: '📭 No content found for that key.', ephemeral: true });
+        }
 
         const embed = createEmbed(content);
-        await message.channel.send({ embeds: [embed] });
+        await interaction.reply({ embeds: [embed] });
     }
 };

@@ -1,17 +1,17 @@
-// commands/embed.js
-const createEmbed = require('../utils/createEmbed');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
-    name: 'embed',
-    description: 'Sends an embed',
-    async execute(message) {
-        if (message.content === '!embed') {
-            const embed = createEmbed({
-                title: '📣 Announcement',
-                description: 'This is an embedded message!'
-            });
+    data: new SlashCommandBuilder()
+        .setName('embed')
+        .setDescription('Send a sample embedded message'),
 
-            await message.channel.send({ embeds: [embed] });
-        }
+    async execute(interaction) {
+        const embed = new EmbedBuilder()
+            .setTitle('📣 Announcement')
+            .setDescription('This is an embedded message!')
+            .setColor(0x1c949d)
+            .setTimestamp();
+
+        await interaction.reply({ embeds: [embed] });
     }
 };

@@ -1,48 +1,48 @@
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
-const mongoose = require('mongoose');
-require('dotenv').config();
 const fs = require('fs');
+require('dotenv').config();
 
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMembers,
-    ],
+        GatewayIntentBits.MessageContent
+    ]
 });
 
 client.commands = new Collection();
 
-// Load commands
+// Load all slash commands
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
-    client.commands.set(command.name, command);
+    if ('data' in command && 'execute' in command) {
+        client.commands.set(command.data.name, command);
+    } else {
+        console.warn(`[WARNING] Slash command in ${file} is missing required "data" or "execute".`);
+    }
 }
 
-// Load events
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-for (const file of eventFiles) {
-    const event = require(`./events/${file}`);
-    client.on(event.name, (...args) => event.execute(...args, client));
-}
+// Listen for interactions (slash commands)
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isChatInputCommand()) return;
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(console.error);
+    const command = client.commands.get(interaction.commandName);
+    if (!command) return;
 
-// Login bot
-client.login(process.env.DISCORD_TOKEN);
-
-// This code initializes a Discord bot using discord.js
-client.on('messageCreate', async message => {
-    if (message.author.bot) return;
-
-    for (const command of client.commands.values()) {
-        if (message.content.startsWith(`!${command.name}`)) {
-            await command.execute(message); 
-        }
+    try {
+        await command.execute(interaction);
+    } catch (error) {
+        console.error(error);
+        await interaction.reply({ content: '❌ There was an error executing this command.', ephemeral: true });
     }
 });
+
+// Bot is ready
+client.once('ready', () => {
+    console.log(`✅ Bot is online as ${client.user.tag}`);
+    client.user.setActivity('Hack the Brain 🚀', { type: 'WATCHING' });
+});
+
+client.login(process.env.DISCORD_TOKEN);
