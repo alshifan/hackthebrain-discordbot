@@ -1,13 +1,12 @@
-const { AttachmentBuilder, ChannelType } = require('discord.js');
+const { ChannelType } = require('discord.js');
+const hasPermission = require('../utils/hasPermission');
 
 module.exports = {
     name: 'sendimage',
     description: 'Send an image to a specific channel (admin/mod only)',
 
     async execute(message) {
-        // Permissions check
-        const isAuthorized = message.member.permissions.has('Administrator') || message.member.permissions.has('ManageMessages');
-        if (!isAuthorized) {
+        if (!hasPermission(message.member, 'Administrator', 'ManageMessages')) {
             return message.reply("⛔ You don't have permission to use this command.");
         }
 
@@ -17,7 +16,7 @@ module.exports = {
         const caption = args.slice(2).join(' ') || null;
 
         if (!channelMention || !imageUrl) {
-            return message.reply('⚠️ Usage: `!sendimage #channel https://drive.google.com/file/d/1DZQQVfpQ5OK8-BHwCQD-3YnzPsvtmhIu/view?usp=drive_link Optional caption`');
+            return message.reply('⚠️ Usage: `!sendimage #channel <imageURL> Optional caption`');
         }
 
         const channelId = channelMention.replace(/[<#>]/g, '');
@@ -34,10 +33,10 @@ module.exports = {
             });
 
             await message.reply(`✅ Image sent to ${targetChannel}`);
-            if (message.deletable) await message.delete(); // optional: clean up
+            if (message.deletable) await message.delete();
         } catch (err) {
             console.error(err);
-            await message.reply('❌ Failed to send image. Make sure the URL is correct.');
+            await message.reply('❌ Failed to send image.');
         }
     }
 };

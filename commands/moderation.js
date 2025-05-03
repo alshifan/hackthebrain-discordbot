@@ -1,9 +1,11 @@
 // commands/moderation.js
+const hasPermission = require('../utils/hasPermission');
+
 module.exports = {
     name: 'moderation',
     description: 'Kick or ban members',
     async execute(message) {
-        if (!message.member.permissions.has('KickMembers')) return;
+        if (!hasPermission(message.member, 'KickMembers')) return;
 
         const args = message.content.split(' ');
         const command = args[0];
@@ -22,4 +24,3 @@ module.exports = {
         }
     }
 };
-// // This command allows users with the "KickMembers" permission to kick or ban members from the server    
