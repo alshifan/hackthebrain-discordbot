@@ -29,8 +29,9 @@ module.exports = {
             if (isDirectImage) {
                 await channel.send({ content: caption || null, files: [url] });
             } else {
-                await channel.send({ content: \`\${caption ? caption + '\n' : ''}\${url}\` });
+                await channel.send({ content: `${caption ? caption + '\n' : ''}${url}` });
             }
+
 
             await interaction.reply({ content: '✅ Image sent!', ephemeral: true });
         } catch (error) {
