@@ -16,7 +16,11 @@ module.exports = {
         .addStringOption(option =>
             option.setName('description')
                 .setDescription('Embed description')
-                .setRequired(true)),
+                .setRequired(true))
+        .addStringOption(option =>
+            option.setName('caption')
+                .setDescription('The caption content')
+                .setRequired(false)),
 
     async execute(interaction) {
         const channel = interaction.options.getChannel('channel');
