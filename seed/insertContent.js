@@ -5,7 +5,7 @@ require('dotenv').config();
 const contents = [
     {
         key: 'about',
-        title: '👋 About Hack the Brain',
+        title: '👋 About Hack the Brain Event happening on George brown Watefront Campus',
         description: 'Hack the Brain is an IT hackathon focused on creativity, learning, and community.',
         fields: [
             { name: '🎯 Goal', value: 'Solve real-world problems with tech-driven solutions.' },
@@ -39,6 +39,10 @@ const contents = [
         description: 'Follow us online to get the latest updates!',
         fields: [
             { name: 'Instagram', value: '[instagram.com/hackthebrain](https://instagram.com/hackthebrain)' },
+            { name: 'Discord', value: '[discord.gg/hackthebrain](https://discord.gg/hackthebrain)' },
+            { name: 'LinkedIn', value: '[linkedin.com/company/hackthebrain](https://linkedin.com/company/hackthebrain)' },
+            { name: 'Website', value: '[www.hackthebraon.ca]' },
+            { name: 'YouTube', value: '[youtube.com/hackthebrain](https://youtube.com/hackthebrain)' },
             { name: 'Twitter', value: '[twitter.com/hackbrain_dev](https://twitter.com/hackbrain_dev)' },
         ],
         footer: 'Tag us with your builds!'
