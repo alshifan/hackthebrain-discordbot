@@ -5,7 +5,6 @@ function createEmbed({ title, description, color = '#1c949d', footer, fields = [
         .setTitle(title)
         .setDescription(description)
         .setColor(color)
-        .setTimestamp();
 
     if (footer) {
         embed.setFooter({ text: footer });

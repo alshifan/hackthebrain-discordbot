@@ -10,7 +10,6 @@ const contentSchema = new mongoose.Schema({
             value: String,
         },
     ],
-    footer: String,
     color: { type: String, default: '#1c949d' },
 });
 
