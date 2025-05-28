@@ -1,4 +1,4 @@
-const { REST, Routes, SlashCommandBuilder } = require('discord.js');
+const { REST, Routes } = require('discord.js');
 const fs = require('fs');
 require('dotenv').config();
 
@@ -18,14 +18,14 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 
 (async () => {
     try {
-        console.log(`🔄 Refreshing ${commands.length} global slash commands...`);
+        console.log(`🔄 Registering ${commands.length} global slash commands...`);
 
         await rest.put(
-            Routes.applicationGuildCommands(process.env.CLIENT_ID, 1363931696696791190),
+            Routes.applicationCommands(process.env.CLIENT_ID),
             { body: commands },
         );
 
-        console.log('✅ Successfully registered global commands.');
+        console.log('✅ Successfully registered global commands!');
     } catch (error) {
         console.error(error);
     }
