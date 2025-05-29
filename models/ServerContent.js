@@ -8,9 +8,12 @@ const contentSchema = new mongoose.Schema({
         {
             name: String,
             value: String,
-            
+
         },
     ],
+    footer: String,
+    timestamp: { type: Date, default: Date.now },
+
     color: { type: String, default: '#1c949d' },
 });
 

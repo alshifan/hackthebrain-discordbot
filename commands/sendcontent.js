@@ -31,14 +31,8 @@ module.exports = {
                 return interaction.reply({ content: `📭 No content found for key \`${key}\`.`, ephemeral: true });
             }
 
-            const embed = createEmbed({
-                title: content.title,
-                description: content.description,
-                color: content.color,
-                footer: content.footer,
-                fields: content.fields,
-                timestamp: true // optional trigger for timestamp, depends on your createEmbed logic
-            }); await channel.send({ embeds: [embed] });
+            const embed = createEmbed(content);
+            await channel.send({ embeds: [embed] });
 
             await interaction.reply({ content: `✅ Sent **${key}** content to ${channel}` });
 
