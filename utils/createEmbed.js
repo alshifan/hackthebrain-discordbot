@@ -1,13 +1,21 @@
 const { EmbedBuilder } = require('discord.js');
 
-function createEmbed({ title, description, color = '#1c949d', footer, fields = [] }) {
+function createEmbed({ title, description, color = '#1c949d', footer, fields = [], timestamp = true, image }) {
     const embed = new EmbedBuilder()
         .setTitle(title)
         .setDescription(description)
-        .setColor(color)
+        .setColor(color);
 
     if (footer) {
         embed.setFooter({ text: footer });
+    }
+
+    if (timestamp !== false) {
+        embed.setTimestamp();
+    }
+
+    if (image) {
+        embed.setImage(image);
     }
 
     fields.forEach(field => {

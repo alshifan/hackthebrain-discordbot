@@ -5,11 +5,11 @@ require('dotenv').config();
 const contents = [
     {
         key: 'about',
-        title: '👋 About Hack the Brain',
-        description: 'HackTheBrain is a dynamic hackathon initiative launched as part of the Google Developer Group and ComUnity Canada, aimed at bringing together a diverse community of change makers who are driven by a passion for real-world innovation. Founded in 2025, this event is not just for coders—it is for anyone with ideas and the drive to make them happen. This year, we are proud to be an official feature of Toronto Tech Week 2025—a premier innovation festival that draws national and international attention.',
+        title: '👋 About **HACK THE BRAIN**',
+        description: '**HACK THE BRAIN** is a dynamic hackathon initiative launched as part of the **Google Developer Group** and **ComUnity Canada**, aimed at bringing together a diverse community of change makers who are driven by a passion for real-world innovation. Founded in 2025, this event is not just for coders—it is for anyone with ideas and the drive to make them happen. This year, we are proud to be an official feature of **Toronto Tech Week 2025**—a premier innovation festival that draws national and international attention.',
         fields: [
-            { name: '🎯 Mission', value: 'Foster collaboration, spark innovation, and empower individuals from all backgrounds to use their skills for social and technological impact.' },
-            { name: '🎓 Audience', value: 'Whether you are a developer, designer, entrepreneur, strategist, or simply someone with a bold vision, HackTheBrain offers an inclusive space to team up, solve problems, and create meaningful solutions that address today’s corporate challenges. Participants will have the opportunity to collaborate across disciplines, push the boundaries of creativity, and transform ideas into action—all within a supportive and high-energy environment.' },
+            { name: '🎯 MISSION', value: 'Foster collaboration, spark innovation, and empower individuals from all backgrounds to use their skills for social and technological impact.' },
+            { name: '🎓 AUDIENCE', value: 'Whether you are a developer, designer, entrepreneur, strategist, or simply someone with a bold vision, HackTheBrain offers an inclusive space to team up, solve problems, and create meaningful solutions that address today’s corporate challenges. Participants will have the opportunity to collaborate across disciplines, push the boundaries of creativity, and transform ideas into action—all within a supportive and high-energy environment.' },
         ],
         footer: 'Let’s innovate together!'
     },
@@ -33,6 +33,16 @@ const contents = [
         ],
         footer: 'Make sure to register before the deadline!'
     },
+
+    {
+        key: 'announcement',
+        title: '🚀 Launch Time!',
+        description: 'Our event starts now!',
+        image: 'https://cdn.example.com/launch-banner.jpg',
+        footer: 'Let’s get started!',
+        timestamp: true
+    },
+
     {
         key: 'socials',
         title: '🌐 Stay Connected',
@@ -51,8 +61,8 @@ const contents = [
         description: 'We’re so excited to have you here! Here’s what to do next:',
         fields: [
             { name: '✅ Step 1', value: 'Check out `#rules` and accept them' },
-            { name: '🛠️ Step 2', value: 'Introduce yourself in `#introduce-yourself' },
-            { name: '📢 Step 3', value: 'Join a team or start your own through #find-your-team' }
+            { name: '🛠️ Step 2', value: 'Introduce yourself in `#introduceyourself`' },
+            { name: '📢 Step 3', value: 'Join a team or start your own through `#find-your-team`' }
         ],
         footer: 'We’re here to help — reach out anytime!'
     }

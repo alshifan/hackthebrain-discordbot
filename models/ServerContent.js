@@ -13,7 +13,6 @@ const contentSchema = new mongoose.Schema({
     ],
     footer: String,
     timestamp: { type: Date, default: Date.now },
-
     color: { type: String, default: '#1c949d' },
 });
 
