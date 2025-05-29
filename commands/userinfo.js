@@ -11,7 +11,7 @@ module.exports = {
                 .setRequired(false)),
 
     async execute(interaction) {
-        await interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply();
 
         const targetUser = interaction.options.getUser('user') || interaction.user;
         const userId = targetUser.id;
