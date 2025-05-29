@@ -13,19 +13,27 @@ module.exports = {
                 .setRequired(true)),
 
     async execute(interaction) {
+        await interaction.deferReply({ ephemeral: true }); // lets Discord know you're working
+
         const member = interaction.member;
         if (!hasPermission(member, 'Administrator')) {
-            return interaction.reply({ content: "⛔ You don't have permission to use this command.", ephemeral: true });
+            return interaction.editReply({ content: "⛔ You don't have permission to use this command." });
         }
 
-        const key = interaction.options.getString('key');
-        const content = await ServerContent.findOne({ key });
+        try {
+            const key = interaction.options.getString('key');
+            const content = await ServerContent.findOne({ key });
 
-        if (!content) {
-            return interaction.reply({ content: '📭 No content found for that key.', ephemeral: true });
+            if (!content) {
+                return interaction.editReply({ content: '📭 No content found for that key.' });
+            }
+
+            const embed = createEmbed(content);
+            await interaction.editReply({ embeds: [embed] });
+        } catch (error) {
+            console.error('❌ /getcontent error:', error);
+            await interaction.editReply({ content: '❌ Something went wrong fetching the content.' });
         }
-
-        const embed = createEmbed(content);
-        await interaction.reply({ embeds: [embed] });
     }
+
 };

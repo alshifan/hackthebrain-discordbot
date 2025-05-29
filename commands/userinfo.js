@@ -4,13 +4,15 @@ const User = require('../models/user.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('userinfo')
-        .setDescription('Show MongoDB user profile')
+        .setDescription('Show user profile')
         .addUserOption(option =>
             option.setName('user')
                 .setDescription('The user to view (optional)')
                 .setRequired(false)),
 
     async execute(interaction) {
+        await interaction.deferReply({ ephemeral: true });
+
         const targetUser = interaction.options.getUser('user') || interaction.user;
         const userId = targetUser.id;
 
@@ -24,13 +26,13 @@ module.exports = {
                 });
             }
 
-            await interaction.reply({
-                content: `📋 User: ${user.username}\n🗓 Joined: ${user.joinDate.toDateString()}\n⚠️ Warnings: ${user.warnings}`,
-                ephemeral: true
+            await interaction.editReply({
+                content: `📋 User: ${user.username}\n🗓 Joined: ${user.joinDate.toDateString()}\n⚠️ Warnings: ${user.warnings}`
             });
         } catch (error) {
             console.error('❌ /userinfo error:', error);
-            await interaction.reply({ content: '❌ Failed to fetch user info.', ephemeral: true });
+            await interaction.editReply({ content: '❌ Failed to fetch user info.' });
         }
     }
+
 };
