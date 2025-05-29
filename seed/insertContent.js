@@ -5,11 +5,11 @@ require('dotenv').config();
 const contents = [
     {
         key: 'about',
-        title: '👋 About Hack the Brain Event happening on George brown Watefront Campus',
-        description: 'Hack the Brain is an IT hackathon focused on creativity, learning, and community.',
+        title: '👋 About Hack the Brain',
+        description: 'HackTheBrain is a dynamic hackathon initiative launched as part of the Google Developer Group and ComUnity Canada, aimed at bringing together a diverse community of change makers who are driven by a passion for real-world innovation. Founded in 2025, this event is not just for coders—it is for anyone with ideas and the drive to make them happen. This year, we are proud to be an official feature of Toronto Tech Week 2025—a premier innovation festival that draws national and international attention.',
         fields: [
-            { name: '🎯 Goal', value: 'Solve real-world problems with tech-driven solutions.' },
-            { name: '🎓 Audience', value: 'Students, hobbyists, and developers from all backgrounds.' },
+            { name: '🎯 Mission', value: 'Foster collaboration, spark innovation, and empower individuals from all backgrounds to use their skills for social and technological impact.' },
+            { name: '🎓 Audience', value: 'Whether you are a developer, designer, entrepreneur, strategist, or simply someone with a bold vision, HackTheBrain offers an inclusive space to team up, solve problems, and create meaningful solutions that address today’s corporate challenges. Participants will have the opportunity to collaborate across disciplines, push the boundaries of creativity, and transform ideas into action—all within a supportive and high-energy environment.' },
         ],
         footer: 'Let’s innovate together!'
     },
@@ -18,10 +18,10 @@ const contents = [
         title: '❓ Frequently Asked Questions',
         description: 'Here are answers to common questions.',
         fields: [
-            { name: 'Is there a fee?', value: 'Nope! It’s completely free.' },
-            { name: 'Do I need a team?', value: 'You can join solo or team up with others in the server!' }
+            { name: 'WHAT DO I NEED TO BRING?', value: 'A laptop and charger.' },
+            { name: 'DO I NEED AN IDEA & A TEAM?', value: 'No, You can create your own team (teams of 5 MAX and teams of 3 MINIMUM) during the hackathon, and generate some amazing creations along the way. If you don&rsquot have a team, we will guide you on getting the team ready. You also dont need to worry about food, weve got you covered.' }
         ],
-        footer: 'Still have questions? Ask in #help-desk!'
+        footer: 'Still have questions? Ask in #ask-us-anything'
     },
     {
         key: 'registration',
@@ -39,11 +39,9 @@ const contents = [
         description: 'Follow us online to get the latest updates!',
         fields: [
             { name: 'Instagram', value: '[instagram.com/hackthebrain](https://instagram.com/hackthebrain)' },
-            { name: 'Discord', value: '[discord.gg/hackthebrain](https://discord.gg/hackthebrain)' },
             { name: 'LinkedIn', value: '[linkedin.com/company/hackthebrain](https://linkedin.com/company/hackthebrain)' },
             { name: 'Website', value: '[www.hackthebraon.ca]' },
             { name: 'YouTube', value: '[youtube.com/hackthebrain](https://youtube.com/hackthebrain)' },
-            { name: 'Twitter', value: '[twitter.com/hackbrain_dev](https://twitter.com/hackbrain_dev)' },
         ],
         footer: 'Tag us with your builds!'
     },
@@ -53,8 +51,8 @@ const contents = [
         description: 'We’re so excited to have you here! Here’s what to do next:',
         fields: [
             { name: '✅ Step 1', value: 'Check out `#rules` and accept them' },
-            { name: '🛠️ Step 2', value: 'Introduce yourself in `#introductions`' },
-            { name: '📢 Step 3', value: 'Join a team or start your own!' }
+            { name: '🛠️ Step 2', value: 'Introduce yourself in `#introduce-yourself' },
+            { name: '📢 Step 3', value: 'Join a team or start your own through #find-your-team' }
         ],
         footer: 'We’re here to help — reach out anytime!'
     }
