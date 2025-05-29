@@ -8,11 +8,11 @@ const contentSchema = new mongoose.Schema({
         {
             name: String,
             value: String,
-
         },
     ],
     footer: String,
-    timestamp: { type: Date, default: Date.now },
+    timestamp: { type: Boolean, default: true }, 
+    image: String,
     color: { type: String, default: '#1c949d' },
 });
 
