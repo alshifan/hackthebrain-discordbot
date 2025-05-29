@@ -5,7 +5,7 @@ require('dotenv').config();
 const contents = [
     {
         key: 'about',
-        title: '👋 About **HACK THE BRAIN**',
+        title: '👋 About HACK THE BRAIN',
         description: '**HACK THE BRAIN** is a dynamic hackathon initiative launched as part of the **Google Developer Group** and **ComUnity Canada**, aimed at bringing together a diverse community of change makers who are driven by a passion for real-world innovation. Founded in 2025, this event is not just for coders—it is for anyone with ideas and the drive to make them happen. This year, we are proud to be an official feature of **Toronto Tech Week 2025**—a premier innovation festival that draws national and international attention.',
         fields: [
             { name: '🎯 MISSION', value: 'Foster collaboration, spark innovation, and empower individuals from all backgrounds to use their skills for social and technological impact.' },
@@ -21,7 +21,7 @@ const contents = [
             { name: 'WHAT DO I NEED TO BRING?', value: 'A laptop and charger.' },
             { name: 'DO I NEED AN IDEA & A TEAM?', value: 'No, You can create your own team (teams of 5 MAX and teams of 3 MINIMUM) during the hackathon, and generate some amazing creations along the way. If you don&rsquot have a team, we will guide you on getting the team ready. You also dont need to worry about food, weve got you covered.' }
         ],
-        footer: 'Still have questions? Ask in #ask-us-anything'
+        footer: 'Still have questions? Ask in `#ask-us-anything`'
     },
     {
         key: 'registration',
@@ -38,7 +38,7 @@ const contents = [
         key: 'announcement',
         title: '🚀 Launch Time!',
         description: 'Our event starts now!',
-        image: 'https://cdn.example.com/launch-banner.jpg',
+        image: 'https://media.discordapp.net/attachments/1364878062726156328/1377503417890771046/image0_0.png?ex=68393387&is=6837e207&hm=61f3392f21989b106d0471cc261fd2abee1810aeb0d26a985dd1f166223cc31e&=&format=webp&quality=lossless&width=488&height=333',
         footer: 'Let’s get started!',
         timestamp: true
     },
@@ -48,9 +48,9 @@ const contents = [
         title: '🌐 Stay Connected',
         description: 'Follow us online to get the latest updates!',
         fields: [
-            { name: 'Instagram', value: '[instagram.com/hackthebrain](https://instagram.com/hackthebrain)' },
-            { name: 'LinkedIn', value: '[linkedin.com/company/hackthebrain](https://linkedin.com/company/hackthebrain)' },
-            { name: 'Website', value: '[www.hackthebraon.ca]' },
+            { name: 'Instagram', value: '[instagram.com/hackthebrain](https://www.instagram.com/hackthebrain_/)' },
+            { name: 'LinkedIn', value: '[linkedin.com/company/hackthebrain](https://www.linkedin.com/company/hackthebrain/)' },
+            { name: 'Website', value: '[hackthebrain.ca](https://www.hackthebrain.ca)' },
             { name: 'YouTube', value: '[youtube.com/hackthebrain](https://youtube.com/hackthebrain)' },
         ],
         footer: 'Tag us with your builds!'
@@ -58,10 +58,11 @@ const contents = [
     {
         key: 'welcome',
         title: '🎉 Welcome to Hack the Brain!',
+        image: 'https://media.discordapp.net/attachments/1364878062726156328/1377503417890771046/image0_0.png?ex=68393387&is=6837e207&hm=61f3392f21989b106d0471cc261fd2abee1810aeb0d26a985dd1f166223cc31e&=&format=webp&quality=lossless&width=488&height=333',
         description: 'We’re so excited to have you here! Here’s what to do next:',
         fields: [
             { name: '✅ Step 1', value: 'Check out `#rules` and accept them' },
-            { name: '🛠️ Step 2', value: 'Introduce yourself in `#introduceyourself`' },
+            { name: '🛠️ Step 2', value: 'Introduce yourself in `#introduce-yourself`' },
             { name: '📢 Step 3', value: 'Join a team or start your own through `#find-your-team`' }
         ],
         footer: 'We’re here to help — reach out anytime!'
