@@ -33,7 +33,7 @@ module.exports = {
             }
 
 
-            await interaction.reply({ content: '✅ Image sent!', ephemeral: true });
+            await interaction.reply({ content: '✅ Image sent!' });
         } catch (error) {
             console.error(error);
             await interaction.reply({ content: '❌ Failed to send image.', ephemeral: true });

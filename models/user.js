@@ -2,11 +2,20 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     userId: { type: String, required: true, unique: true },
+    nickname: String,
     username: String,
+    avatar: String,
+    roles: [String],
     joinDate: { type: Date, default: Date.now },
-    warnings: { type: Number, default: 0 }
+    joinedServerAt: Date,
+    warnings: { type: Number, default: 0 },
+    activityScore: { type: Number, default: 0 },
+    lastActive: { type: Date, default: Date.now },
+    lastMessage: String,
+    lastMessageChannel: String,
+    lastMessageTimestamp: Date,
+    lastCommand: String,
+
 });
 
 module.exports = mongoose.model('User', userSchema);
-// This code defines a Mongoose schema for a user in a Discord bot
-// It includes fields for userId, username, joinDate, and warnings

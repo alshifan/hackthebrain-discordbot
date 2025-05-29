@@ -8,6 +8,7 @@ const contentSchema = new mongoose.Schema({
         {
             name: String,
             value: String,
+            
         },
     ],
     color: { type: String, default: '#1c949d' },

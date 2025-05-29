@@ -34,7 +34,7 @@ module.exports = {
             // Send the reply
             await targetMessage.reply(replyContent);
 
-            await interaction.reply({ content: '✅ Replied to the message successfully!', ephemeral: true });
+            await interaction.reply({ content: '✅ Replied to the message successfully!' });
         } catch (err) {
             console.error('❌ /replymessage error:', err);
             await interaction.reply({ content: '❌ Failed to reply to the message.', ephemeral: true });

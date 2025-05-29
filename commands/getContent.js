@@ -13,7 +13,7 @@ module.exports = {
                 .setRequired(true)),
 
     async execute(interaction) {
-        await interaction.deferReply({ ephemeral: true }); // lets Discord know you're working
+        await interaction.deferReply(); // lets Discord know you're working
 
         const member = interaction.member;
         if (!hasPermission(member, 'Administrator')) {

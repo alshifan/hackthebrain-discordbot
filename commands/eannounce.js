@@ -31,6 +31,6 @@ module.exports = {
             .setTimestamp();
 
         await channel.send({ embeds: [embed] });
-        await interaction.reply({ content: '✅ Embedded announcement sent!', ephemeral: true });
+        await interaction.reply({ content: '✅ Embedded announcement sent!' });
     }
 };
