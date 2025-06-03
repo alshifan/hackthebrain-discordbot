@@ -21,13 +21,16 @@ module.exports = {
     async execute(interaction) {
         const channel = interaction.options.getChannel('channel');
         const url = interaction.options.getString('url');
-        const caption = interaction.options.getString('caption') || null;
+        const caption = interaction.options.getString('caption');
 
         const isDirectImage = /\.(jpg|jpeg|png|gif|webp)$/i.test(url);
 
         try {
             if (isDirectImage) {
-                await channel.send({ content: caption || null, files: [url] });
+                const messageOptions = caption
+                    ? { content: caption, files: [url] }
+                    : { files: [url] };
+                await channel.send(messageOptions);
             } else {
                 await channel.send({ content: `${caption ? caption + '\n' : ''}${url}` });
             }
