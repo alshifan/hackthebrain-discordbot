@@ -19,6 +19,6 @@ module.exports = {
         const message = interaction.options.getString('message');
 
         await channel.send(message);
-        await interaction.reply({ content: '✅ Announcement sent!' });
+        await interaction.reply({ content: '✅ Announcement sent to channel!' });
     }
 };
