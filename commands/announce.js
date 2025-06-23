@@ -16,9 +16,12 @@ module.exports = {
 
     async execute(interaction) {
         const channel = interaction.options.getChannel('channel');
-        const message = interaction.options.getString('message');
+        let message = interaction.options.getString('message');
+
+        message = message.replace(/^>>>?\s*/, '');
 
         await channel.send(message);
         await interaction.reply({ content: '✅ Announcement sent to channel!' });
     }
+
 };
