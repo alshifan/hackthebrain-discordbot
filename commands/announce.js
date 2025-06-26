@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ChannelType } = require('discord.js');
+const { SlashCommandBuilder, ChannelType, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -12,20 +12,35 @@ module.exports = {
         .addStringOption(option =>
             option.setName('message')
                 .setDescription('The message content')
-                .setRequired(true)),
+                .setRequired(false)),
 
     async execute(interaction) {
         const channel = interaction.options.getChannel('channel');
         let message = interaction.options.getString('message');
 
-        // Allow escaped newlines and tabs in the slash command input
-        message = message.replace(/\\n/g, '\n').replace(/\\t/g, '\t');
+        if (message) {
+            message = message.replace(/\\n/g, '\n').replace(/\\t/g, '\t');
+            message = message.replace(/^>>>?\s*/, '');
+            await channel.send(message);
+            return interaction.reply({ content: '✅ Announcement sent to channel!' });
+        }
 
-        // Remove any leading block quote markup
-        message = message.replace(/^>>>?\s*/, '');
+        const modalId = `announceModal-${interaction.id}`;
+        const modal = new ModalBuilder()
+            .setCustomId(modalId)
+            .setTitle('Announcement Message');
 
-        await channel.send(message);
-        await interaction.reply({ content: '✅ Announcement sent to channel!' });
+        const input = new TextInputBuilder()
+            .setCustomId('message')
+            .setLabel('Message')
+            .setStyle(TextInputStyle.Paragraph)
+            .setRequired(true);
+
+        modal.addComponents(new ActionRowBuilder().addComponents(input));
+
+        interaction.client.modals.set(modalId, { channelId: channel.id });
+
+        await interaction.showModal(modal);
     }
 
 };
