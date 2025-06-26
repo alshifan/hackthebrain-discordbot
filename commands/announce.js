@@ -18,6 +18,10 @@ module.exports = {
         const channel = interaction.options.getChannel('channel');
         let message = interaction.options.getString('message');
 
+        // Allow escaped newlines and tabs in the slash command input
+        message = message.replace(/\\n/g, '\n').replace(/\\t/g, '\t');
+
+        // Remove any leading block quote markup
         message = message.replace(/^>>>?\s*/, '');
 
         await channel.send(message);

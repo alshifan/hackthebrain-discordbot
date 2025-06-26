@@ -22,7 +22,10 @@ module.exports = {
     async execute(interaction) {
         const channel = interaction.options.getChannel('channel');
         const title = interaction.options.getString('title');
-        const description = interaction.options.getString('description');
+        let description = interaction.options.getString('description');
+
+        // Allow escaped newlines and tabs for better formatting
+        description = description.replace(/\\n/g, '\n').replace(/\\t/g, '\t');
 
         const embed = new EmbedBuilder()
             .setTitle(title)
